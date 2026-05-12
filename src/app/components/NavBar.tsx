@@ -6,7 +6,7 @@ import IconLogo from './ui/IconLogo';
 const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard', to: '/' },
   { icon: FileText, label: 'Reports', to: '/reports' },
-  { icon: Users, label: 'Employees', to: '/employees' },
+  { icon: Users, label: 'Operations', to: '/operations' },
   { icon: Settings, label: 'Settings', to: '/settings' },
 ];
 

@@ -1,6 +1,8 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import DashboardPage from './pages/DashboardPage';
 import ReportsPage from './pages/ReportsPage';
+import OperationsPage from './pages/OperationsPage';
+import SettingsPage from './pages/SettingsPage';
 
 export default function App() {
   return (
@@ -15,6 +17,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/reports" element={<ReportsPage />} />
+          <Route path="/operations" element={<OperationsPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Routes>
       </div>
     </HashRouter>

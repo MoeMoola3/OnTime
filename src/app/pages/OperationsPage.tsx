@@ -80,447 +80,310 @@ const mockEmployees = [
   },
 ];
 
-const shiftCoverageData = [
-  { shift: 'Morning Shift', scheduled: 45, actual: 42, gap: 3 },
-  { shift: 'Night Shift', scheduled: 25, actual: 27, gap: -2 },
-];
-
-const attendanceData = [
+const staffData = [
   {
     id: 1,
-    name: 'John Smith',
-    department: 'Processing',
-    date: '2026-05-07',
-    clockIn: '08:00',
-    clockOut: '16:30',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 2,
-    name: 'Maria Garcia',
-    department: 'Cold Storage',
-    date: '2026-05-07',
-    clockIn: '07:55',
-    clockOut: '16:25',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 3,
-    name: 'David Chen',
-    department: 'Dispatch',
-    date: '2026-05-07',
-    clockIn: '08:15',
-    clockOut: '16:45',
-    hours: 8.5,
-    status: 'Late',
-  },
-  { id: 4, name: 'Sarah Williams', department: 'Slaughter', date: '2026-05-07', clockIn: '-', clockOut: '-', hours: 0, status: 'Absent' },
-  {
-    id: 5,
-    name: 'Michael Brown',
-    department: 'Processing',
-    date: '2026-05-07',
-    clockIn: '08:05',
-    clockOut: '16:35',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 6,
-    name: 'Lisa Anderson',
-    department: 'Cold Storage',
-    date: '2026-05-07',
-    clockIn: '08:20',
-    clockOut: '16:50',
-    hours: 8.5,
-    status: 'Late',
-  },
-  {
-    id: 7,
-    name: 'James Taylor',
-    department: 'Dispatch',
-    date: '2026-05-07',
-    clockIn: '08:00',
-    clockOut: '16:30',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 8,
-    name: 'Emma Martinez',
-    department: 'Slaughter',
-    date: '2026-05-07',
-    clockIn: '07:58',
-    clockOut: '16:28',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 9,
-    name: 'Robert Johnson',
-    department: 'Processing',
-    date: '2026-05-07',
-    clockIn: '08:02',
-    clockOut: '16:32',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 10,
-    name: 'Jennifer Lee',
-    department: 'Cold Storage',
-    date: '2026-05-07',
-    clockIn: '08:10',
-    clockOut: '16:40',
-    hours: 8.5,
-    status: 'Late',
-  },
-  {
-    id: 11,
-    name: 'Carlos Rodriguez',
-    department: 'Dispatch',
-    date: '2026-05-07',
-    clockIn: '08:00',
-    clockOut: '16:30',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 12,
-    name: 'Patricia Kim',
-    department: 'Slaughter',
-    date: '2026-05-07',
-    clockIn: '07:58',
-    clockOut: '16:28',
-    hours: 8.5,
-    status: 'Present',
-  },
-];
-
-const shiftAssignmentData = [
-  {
-    id: 1,
-    name: 'John Smith',
-    department: 'Processing',
-    shift: 'Morning (6AM-2PM)',
-    date: '2026-05-08',
-    role: 'Shift Lead',
-    status: 'Confirmed',
-  },
-  {
-    id: 2,
-    name: 'Maria Garcia',
-    department: 'Cold Storage',
-    shift: 'Afternoon (2PM-10PM)',
-    date: '2026-05-08',
-    role: 'Operator',
-    status: 'Confirmed',
-  },
-  {
-    id: 3,
-    name: 'David Chen',
-    department: 'Dispatch',
-    shift: 'Morning (6AM-2PM)',
-    date: '2026-05-08',
-    role: 'Coordinator',
-    status: 'Confirmed',
-  },
-  {
-    id: 4,
-    name: 'Sarah Williams',
-    department: 'Slaughter',
-    shift: 'Night (10PM-6AM)',
-    date: '2026-05-08',
-    role: 'Technician',
-    status: 'Pending',
-  },
-  {
-    id: 5,
-    name: 'Michael Brown',
-    department: 'Processing',
-    shift: 'Afternoon (2PM-10PM)',
-    date: '2026-05-08',
-    role: 'Operator',
-    status: 'Confirmed',
-  },
-  {
-    id: 6,
-    name: 'Lisa Anderson',
-    department: 'Cold Storage',
-    shift: 'Morning (6AM-2PM)',
-    date: '2026-05-08',
-    role: 'Shift Lead',
-    status: 'Confirmed',
-  },
-  {
-    id: 7,
-    name: 'James Taylor',
-    department: 'Dispatch',
-    shift: 'Afternoon (2PM-10PM)',
-    date: '2026-05-08',
-    role: 'Coordinator',
-    status: 'Confirmed',
-  },
-  {
-    id: 8,
-    name: 'Emma Martinez',
-    department: 'Slaughter',
-    shift: 'Morning (6AM-2PM)',
-    date: '2026-05-08',
-    role: 'Operator',
-    status: 'Confirmed',
-  },
-  {
-    id: 9,
-    name: 'Robert Johnson',
-    department: 'Processing',
-    shift: 'Night (10PM-6AM)',
-    date: '2026-05-08',
-    role: 'Operator',
-    status: 'Pending',
-  },
-  {
-    id: 10,
-    name: 'Jennifer Lee',
-    department: 'Cold Storage',
-    shift: 'Afternoon (2PM-10PM)',
-    date: '2026-05-08',
-    role: 'Operator',
-    status: 'Confirmed',
-  },
-  {
-    id: 10,
-    name: 'Jennifer Lee',
-    department: 'Cold Storage',
-    shift: 'Afternoon (2PM-10PM)',
-    date: '2026-05-08',
-    role: 'Operator',
-    status: 'Confirmed',
-  },
-];
-
-const leaveRequestsData = [
-  {
-    id: 1,
-    name: 'John Smith',
-    department: 'Processing',
-    leaveType: 'Vacation',
-    startDate: '2026-05-15',
-    endDate: '2026-05-18',
-    days: 4,
-    status: 'Approved',
-  },
-  {
-    id: 2,
-    name: 'Maria Garcia',
-    department: 'Cold Storage',
-    leaveType: 'Sick Leave',
-    startDate: '2026-05-10',
-    endDate: '2026-05-11',
-    days: 2,
-    status: 'Approved',
-  },
-  {
-    id: 3,
-    name: 'David Chen',
-    department: 'Dispatch',
-    leaveType: 'Personal',
-    startDate: '2026-05-20',
-    endDate: '2026-05-20',
-    days: 1,
-    status: 'Pending',
-  },
-  {
-    id: 4,
-    name: 'Sarah Williams',
-    department: 'Slaughter',
-    leaveType: 'Vacation',
-    startDate: '2026-05-22',
-    endDate: '2026-05-25',
-    days: 4,
-    status: 'Pending',
-  },
-  {
-    id: 5,
-    name: 'Michael Brown',
-    department: 'Processing',
-    leaveType: 'Medical',
-    startDate: '2026-05-12',
-    endDate: '2026-05-14',
-    days: 3,
-    status: 'Approved',
-  },
-  {
-    id: 6,
-    name: 'Lisa Anderson',
-    department: 'Cold Storage',
-    leaveType: 'Vacation',
-    startDate: '2026-05-28',
-    endDate: '2026-05-31',
-    days: 4,
-    status: 'Rejected',
-  },
-  {
-    id: 7,
-    name: 'James Taylor',
-    department: 'Dispatch',
-    leaveType: 'Personal',
-    startDate: '2026-05-16',
-    endDate: '2026-05-16',
-    days: 1,
-    status: 'Approved',
-  },
-  {
-    id: 8,
-    name: 'Emma Martinez',
-    department: 'Slaughter',
-    leaveType: 'Sick Leave',
-    startDate: '2026-05-09',
-    endDate: '2026-05-09',
-    days: 1,
-    status: 'Approved',
-  },
-  {
-    id: 9,
-    name: 'Robert Johnson',
-    department: 'Processing',
-    leaveType: 'Vacation',
-    startDate: '2026-06-01',
-    endDate: '2026-06-05',
-    days: 5,
-    status: 'Pending',
-  },
-  {
-    id: 10,
-    name: 'Jennifer Lee',
-    department: 'Cold Storage',
-    leaveType: 'Medical',
-    startDate: '2026-05-13',
-    endDate: '2026-05-15',
-    days: 3,
-    status: 'Approved',
-  },
-];
-
-const leaveBalancesData = [
-  { id: 1, name: 'John Smith', department: 'Processing', vacation: 12, sick: 8, personal: 3, medical: 5, total: 28 },
-  { id: 2, name: 'Maria Garcia', department: 'Cold Storage', vacation: 15, sick: 6, personal: 5, medical: 7, total: 33 },
-  { id: 3, name: 'David Chen', department: 'Dispatch', vacation: 10, sick: 10, personal: 2, medical: 4, total: 26 },
-  { id: 4, name: 'Sarah Williams', department: 'Slaughter', vacation: 18, sick: 7, personal: 4, medical: 6, total: 35 },
-  { id: 5, name: 'Michael Brown', department: 'Processing', vacation: 8, sick: 9, personal: 3, medical: 5, total: 25 },
-  { id: 6, name: 'Lisa Anderson', department: 'Cold Storage', vacation: 14, sick: 8, personal: 5, medical: 6, total: 33 },
-  { id: 7, name: 'James Taylor', department: 'Dispatch', vacation: 11, sick: 7, personal: 4, medical: 5, total: 27 },
-  { id: 8, name: 'Emma Martinez', department: 'Slaughter', vacation: 16, sick: 6, personal: 3, medical: 7, total: 32 },
-  { id: 9, name: 'Robert Johnson', department: 'Processing', vacation: 9, sick: 10, personal: 2, medical: 4, total: 25 },
-  { id: 10, name: 'Jennifer Lee', department: 'Cold Storage', vacation: 13, sick: 8, personal: 5, medical: 6, total: 32 },
-];
-
-const payrollData = [
-  {
-    id: 1,
+    employeeId: 'EMP001',
     name: 'John Smith',
     department: 'Processing',
     position: 'Shift Lead',
-    hoursWorked: 170,
-    hourlyRate: 28.5,
-    grossPay: 4845,
-    netPay: 3876,
+    email: 'john.smith@company.com',
+    phone: '(555) 123-4567',
+    hireDate: '2023-01-15',
+    status: 'Active',
   },
   {
     id: 2,
+    employeeId: 'EMP002',
     name: 'Maria Garcia',
     department: 'Cold Storage',
     position: 'Operator',
-    hoursWorked: 168,
-    hourlyRate: 24.0,
-    grossPay: 4032,
-    netPay: 3225.6,
+    email: 'maria.garcia@company.com',
+    phone: '(555) 234-5678',
+    hireDate: '2023-03-20',
+    status: 'Active',
   },
   {
     id: 3,
+    employeeId: 'EMP003',
     name: 'David Chen',
     department: 'Dispatch',
     position: 'Coordinator',
-    hoursWorked: 172,
-    hourlyRate: 26.75,
-    grossPay: 4601,
-    netPay: 3680.8,
+    email: 'david.chen@company.com',
+    phone: '(555) 345-6789',
+    hireDate: '2022-11-10',
+    status: 'Active',
   },
   {
     id: 4,
+    employeeId: 'EMP004',
     name: 'Sarah Williams',
     department: 'Slaughter',
     position: 'Technician',
-    hoursWorked: 160,
-    hourlyRate: 27.5,
-    grossPay: 4400,
-    netPay: 3520,
+    email: 'sarah.williams@company.com',
+    phone: '(555) 456-7890',
+    hireDate: '2024-02-01',
+    status: 'On Leave',
   },
   {
     id: 5,
+    employeeId: 'EMP005',
     name: 'Michael Brown',
     department: 'Processing',
     position: 'Operator',
-    hoursWorked: 170,
-    hourlyRate: 24.0,
-    grossPay: 4080,
-    netPay: 3264,
+    email: 'michael.brown@company.com',
+    phone: '(555) 567-8901',
+    hireDate: '2023-06-15',
+    status: 'Active',
   },
   {
     id: 6,
+    employeeId: 'EMP006',
     name: 'Lisa Anderson',
     department: 'Cold Storage',
     position: 'Shift Lead',
-    hoursWorked: 168,
-    hourlyRate: 29.0,
-    grossPay: 4872,
-    netPay: 3897.6,
+    email: 'lisa.anderson@company.com',
+    phone: '(555) 678-9012',
+    hireDate: '2022-08-22',
+    status: 'Active',
   },
   {
     id: 7,
+    employeeId: 'EMP007',
     name: 'James Taylor',
     department: 'Dispatch',
     position: 'Coordinator',
-    hoursWorked: 172,
-    hourlyRate: 26.75,
-    grossPay: 4601,
-    netPay: 3680.8,
+    email: 'james.taylor@company.com',
+    phone: '(555) 789-0123',
+    hireDate: '2023-04-18',
+    status: 'Active',
   },
   {
     id: 8,
+    employeeId: 'EMP008',
     name: 'Emma Martinez',
     department: 'Slaughter',
     position: 'Operator',
-    hoursWorked: 170,
-    hourlyRate: 25.5,
-    grossPay: 4335,
-    netPay: 3468,
+    email: 'emma.martinez@company.com',
+    phone: '(555) 890-1234',
+    hireDate: '2024-01-10',
+    status: 'Active',
   },
   {
     id: 9,
+    employeeId: 'EMP009',
     name: 'Robert Johnson',
     department: 'Processing',
     position: 'Operator',
-    hoursWorked: 165,
-    hourlyRate: 24.0,
-    grossPay: 3960,
-    netPay: 3168,
+    email: 'robert.johnson@company.com',
+    phone: '(555) 901-2345',
+    hireDate: '2023-09-05',
+    status: 'Active',
   },
   {
     id: 10,
+    employeeId: 'EMP010',
     name: 'Jennifer Lee',
     department: 'Cold Storage',
     position: 'Operator',
-    hoursWorked: 168,
-    hourlyRate: 24.5,
-    grossPay: 4116,
-    netPay: 3292.8,
+    email: 'jennifer.lee@company.com',
+    phone: '(555) 012-3456',
+    hireDate: '2023-07-12',
+    status: 'Active',
   },
 ];
 
-export default function ReportsPage() {
+const departmentsData = [
+  {
+    id: 1,
+    name: 'Processing',
+    manager: 'John Smith',
+    employeeCount: 45,
+    location: 'Building A - Floor 2',
+    status: 'Active',
+  },
+  {
+    id: 2,
+    name: 'Cold Storage',
+    manager: 'Lisa Anderson',
+    employeeCount: 32,
+    location: 'Building B - Floor 1',
+
+    status: 'Active',
+  },
+  { id: 3, name: 'Dispatch', manager: 'David Chen', employeeCount: 28, location: 'Building C - Floor 1', status: 'Active' },
+  {
+    id: 4,
+    name: 'Slaughter',
+    manager: 'Sarah Williams',
+    employeeCount: 38,
+    location: 'Building A - Floor 1',
+
+    status: 'Active',
+  },
+  {
+    id: 5,
+    name: 'Quality Control',
+    manager: 'Michael Brown',
+    employeeCount: 15,
+    location: 'Building B - Floor 2',
+
+    status: 'Active',
+  },
+  { id: 6, name: 'Maintenance', manager: 'James Taylor', employeeCount: 12, location: 'Building D', status: 'Active' },
+  { id: 7, name: 'Administration', manager: 'Emma Martinez', employeeCount: 8, location: 'Main Office', status: 'Active' },
+];
+
+const terminalsData = [
+  {
+    id: 1,
+    terminalId: 'TERM001',
+    name: 'Main Entrance - Building A',
+    location: 'Building A - Entrance',
+    status: 'Online',
+    lastSync: '2026-05-12 08:30:15',
+    assignedEmployees: 85,
+  },
+  {
+    id: 2,
+    terminalId: 'TERM002',
+    name: 'Cold Storage Entry',
+    location: 'Building B - Floor 1',
+    status: 'Online',
+    lastSync: '2026-05-12 08:29:45',
+    assignedEmployees: 32,
+  },
+  {
+    id: 3,
+    terminalId: 'TERM003',
+    name: 'Dispatch Hub',
+    location: 'Building C - Floor 1',
+    status: 'Online',
+    lastSync: '2026-05-12 08:31:20',
+    assignedEmployees: 28,
+  },
+  {
+    id: 4,
+    terminalId: 'TERM004',
+    name: 'Secondary Entrance - Building A',
+    location: 'Building A - Side Entrance',
+    status: 'Offline',
+    lastSync: '2026-05-12 06:15:30',
+    assignedEmployees: 45,
+  },
+  {
+    id: 5,
+    terminalId: 'TERM005',
+    name: 'QC Station',
+    location: 'Building B - Floor 2',
+    status: 'Online',
+    lastSync: '2026-05-12 08:28:55',
+    assignedEmployees: 15,
+  },
+  {
+    id: 6,
+    terminalId: 'TERM006',
+    name: 'Maintenance Shop',
+    location: 'Building D',
+    status: 'Online',
+    lastSync: '2026-05-12 08:30:40',
+    assignedEmployees: 12,
+  },
+  {
+    id: 7,
+    terminalId: 'TERM007',
+    name: 'Office Terminal',
+    location: 'Main Office',
+    status: 'Online',
+    lastSync: '2026-05-12 08:29:10',
+    assignedEmployees: 8,
+  },
+];
+
+const shiftsData = [
+  {
+    id: 1,
+    shiftName: 'Morning Shift',
+    startTime: '06:00 AM',
+    endTime: '02:00 PM',
+    duration: '8 hours',
+    days: 'Mon-Fri',
+    department: 'All Departments',
+    capacity: 120,
+  },
+  {
+    id: 2,
+    shiftName: 'Afternoon Shift',
+    startTime: '02:00 PM',
+    endTime: '10:00 PM',
+    duration: '8 hours',
+    days: 'Mon-Fri',
+    department: 'All Departments',
+    capacity: 95,
+  },
+  {
+    id: 3,
+    shiftName: 'Night Shift',
+    startTime: '10:00 PM',
+    endTime: '06:00 AM',
+    duration: '8 hours',
+    days: 'Mon-Fri',
+    department: 'All Departments',
+    capacity: 65,
+  },
+  {
+    id: 4,
+    shiftName: 'Weekend Morning',
+    startTime: '06:00 AM',
+    endTime: '02:00 PM',
+    duration: '8 hours',
+    days: 'Sat-Sun',
+    department: 'Essential Only',
+    capacity: 45,
+  },
+  {
+    id: 5,
+    shiftName: 'Weekend Afternoon',
+    startTime: '02:00 PM',
+    endTime: '10:00 PM',
+    duration: '8 hours',
+    days: 'Sat-Sun',
+    department: 'Essential Only',
+    capacity: 35,
+  },
+  {
+    id: 6,
+    shiftName: 'Extended Morning',
+    startTime: '05:00 AM',
+    endTime: '03:00 PM',
+    duration: '10 hours',
+    days: 'Mon-Fri',
+    department: 'Processing, Slaughter',
+    capacity: 50,
+  },
+  {
+    id: 7,
+    shiftName: 'Split Shift A',
+    startTime: '07:00 AM',
+    endTime: '11:00 AM',
+    duration: '4 hours',
+    days: 'Mon-Fri',
+    department: 'Dispatch',
+    capacity: 15,
+  },
+  {
+    id: 8,
+    shiftName: 'Split Shift B',
+    startTime: '03:00 PM',
+    endTime: '07:00 PM',
+    duration: '4 hours',
+    days: 'Mon-Fri',
+    department: 'Dispatch',
+    capacity: 15,
+  },
+];
+
+export default function OperationsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [showExportMenu, setShowExportMenu] = useState(false);
   const [selectedDepartment, setSelectedDepartment] = useState('All Departments');
@@ -530,7 +393,6 @@ export default function ReportsPage() {
   const navigate = useNavigate();
   const itemsPerPage = 10;
 
-  // Filter employees based on selected filters
   const filteredEmployees = mockEmployees.filter((employee) => {
     const departmentMatch = selectedDepartment === 'All Departments' || employee.department === selectedDepartment;
     const employeeMatch =
@@ -798,22 +660,20 @@ export default function ReportsPage() {
   const employees = ['All Employees', 'Active Only', 'On Leave'];
   const dateRange = ['Last 7 Days', 'Last 30 Days', 'This Month'];
 
-  const [activeTab, setActiveTab] = useState<'attendance' | 'shifts' | 'leaveRequests' | 'leaveBalances' | 'payroll'>('attendance');
+  const [activeTab, setActiveTab] = useState<'staff' | 'departments' | 'terminals' | 'shifts'>('staff');
 
-  const getCurrentData = () => {
+  const getCurrentData: any = () => {
     switch (activeTab) {
-      case 'attendance':
-        return attendanceData;
+      case 'staff':
+        return staffData;
+      case 'departments':
+        return departmentsData;
+      case 'terminals':
+        return terminalsData;
       case 'shifts':
-        return shiftAssignmentData;
-      case 'leaveRequests':
-        return leaveRequestsData;
-      case 'leaveBalances':
-        return leaveBalancesData;
-      case 'payroll':
-        return payrollData;
+        return shiftsData;
       default:
-        return attendanceData;
+        return staffData;
     }
   };
 
@@ -849,8 +709,8 @@ export default function ReportsPage() {
                 <FileText className="h-6 w-6 text-orange-400" />
               </div>
               <div>
-                <h1 className="mb-1 text-white">Reports</h1>
-                <p className="text-sm text-gray-400">Track Workforce Activity Across Departments</p>
+                <h1 className="mb-1 text-white">Operations</h1>
+                <p className="text-sm text-gray-400">Manage and Monitor Operational Activity</p>
               </div>
             </div>
           </div>
@@ -860,14 +720,34 @@ export default function ReportsPage() {
         <div className="relative rounded-2xl border border-white/10 bg-white/5 p-2 backdrop-blur-xl">
           <div className="flex items-center gap-2 overflow-x-auto">
             <button
-              onClick={() => handleTabChange('attendance')}
+              onClick={() => handleTabChange('staff')}
               className={`rounded-xl px-6 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
-                activeTab === 'attendance'
+                activeTab === 'staff'
                   ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
                   : 'text-gray-400 hover:bg-white/5 hover:text-white'
               }`}
             >
-              Attendance
+              Staff
+            </button>
+            <button
+              onClick={() => handleTabChange('departments')}
+              className={`rounded-xl px-6 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
+                activeTab === 'departments'
+                  ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
+                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              Departments
+            </button>
+            <button
+              onClick={() => handleTabChange('terminals')}
+              className={`rounded-xl px-6 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
+                activeTab === 'terminals'
+                  ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
+                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              Terminals
             </button>
             <button
               onClick={() => handleTabChange('shifts')}
@@ -877,37 +757,7 @@ export default function ReportsPage() {
                   : 'text-gray-400 hover:bg-white/5 hover:text-white'
               }`}
             >
-              Shift Assignment
-            </button>
-            <button
-              onClick={() => handleTabChange('leaveRequests')}
-              className={`rounded-xl px-6 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
-                activeTab === 'leaveRequests'
-                  ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
-                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
-              }`}
-            >
-              Leave Requests
-            </button>
-            <button
-              onClick={() => handleTabChange('leaveBalances')}
-              className={`rounded-xl px-6 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
-                activeTab === 'leaveBalances'
-                  ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
-                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
-              }`}
-            >
-              Leave Balances
-            </button>
-            <button
-              onClick={() => handleTabChange('payroll')}
-              className={`rounded-xl px-6 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
-                activeTab === 'payroll'
-                  ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
-                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
-              }`}
-            >
-              Payroll
+              Shifts
             </button>
           </div>
         </div>
@@ -1004,11 +854,10 @@ export default function ReportsPage() {
               <FileText className="h-5 w-5 text-orange-400" />
             </div>
             <h2 className="text-white">
-              {activeTab === 'attendance' && 'Attendance Report'}
-              {activeTab === 'shifts' && 'Shift Assignment'}
-              {activeTab === 'leaveRequests' && 'Leave Requests'}
-              {activeTab === 'leaveBalances' && 'Leave Balances'}
-              {activeTab === 'payroll' && 'Payroll Report'}
+              {activeTab === 'staff' && 'Staff'}
+              {activeTab === 'departments' && 'Departments'}
+              {activeTab === 'terminals' && 'Terminals'}
+              {activeTab === 'shifts' && 'Shifts'}
             </h2>
           </div>
 
@@ -1016,58 +865,46 @@ export default function ReportsPage() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-white/10">
-                  {activeTab === 'attendance' && (
+                  {activeTab === 'staff' && (
                     <>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee Name</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee ID</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Name</th>
                       <th className="pb-3 text-left text-sm font-medium text-gray-400">Department</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Date</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Clock In</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Clock Out</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Hours</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Position</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Email</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Phone</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Hire Date</th>
                       <th className="pb-3 text-left text-sm font-medium text-gray-400">Status</th>
+                    </>
+                  )}
+                  {activeTab === 'departments' && (
+                    <>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Department Name</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Manager</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee Count</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Location</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Status</th>
+                    </>
+                  )}
+                  {activeTab === 'terminals' && (
+                    <>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Terminal ID</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Name</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Location</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Status</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Last Sync</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Assigned Employees</th>
                     </>
                   )}
                   {activeTab === 'shifts' && (
                     <>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee Name</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Department</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Shift</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Date</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Role</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Status</th>
-                    </>
-                  )}
-                  {activeTab === 'leaveRequests' && (
-                    <>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee Name</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Department</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Leave Type</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Start Date</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">End Date</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Shift Name</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Start Time</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">End Time</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Duration</th>
                       <th className="pb-3 text-left text-sm font-medium text-gray-400">Days</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Status</th>
-                    </>
-                  )}
-                  {activeTab === 'leaveBalances' && (
-                    <>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee Name</th>
                       <th className="pb-3 text-left text-sm font-medium text-gray-400">Department</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Vacation</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Sick</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Personal</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Medical</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Total</th>
-                    </>
-                  )}
-                  {activeTab === 'payroll' && (
-                    <>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee Name</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Department</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Position</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Hours Worked</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Hourly Rate</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Gross Pay</th>
-                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Net Pay</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Capacity</th>
                     </>
                   )}
                 </tr>
@@ -1075,110 +912,70 @@ export default function ReportsPage() {
               <tbody>
                 {currentData.map((item: any) => (
                   <tr key={item.id} className="border-b border-white/5 transition-all duration-300 hover:bg-white/5">
-                    {activeTab === 'attendance' && (
+                    {activeTab === 'staff' && (
                       <>
+                        <td className="py-4 text-sm text-gray-300">{item.employeeId}</td>
                         <td className="py-4 text-sm text-white">{item.name}</td>
                         <td className="py-4 text-sm text-gray-300">{item.department}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.date}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.clockIn}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.clockOut}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.hours}h</td>
+                        <td className="py-4 text-sm text-gray-300">{item.position}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.email}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.phone}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.hireDate}</td>
                         <td className="py-4">
-                          <span className={`rounded-full border px-3 py-1 text-xs font-medium ${getStatusColor(item.status)}`}>
+                          <span
+                            className={`rounded-full border px-3 py-1 text-xs font-medium ${
+                              item.status === 'Active'
+                                ? 'border-green-400/20 bg-green-400/10 text-green-400'
+                                : 'border-amber-400/20 bg-amber-400/10 text-amber-400'
+                            }`}
+                          >
                             {item.status}
                           </span>
                         </td>
                       </>
                     )}
-                    {activeTab === 'shifts' && (
+                    {activeTab === 'departments' && (
                       <>
                         <td className="py-4 text-sm text-white">{item.name}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.department}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.shift}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.date}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.role}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.status}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.manager}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.employeeCount}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.location}</td>
+                        <td className="py-4">
+                          <span className="rounded-full border border-green-400/20 bg-green-400/10 px-3 py-1 text-xs font-medium text-green-400">
+                            {item.status}
+                          </span>
+                        </td>
                       </>
                     )}
-                    {activeTab === 'leaveRequests' && (
+                    {activeTab === 'terminals' && (
                       <>
+                        <td className="py-4 text-sm text-gray-300">{item.terminalId}</td>
                         <td className="py-4 text-sm text-white">{item.name}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.department}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.leaveType}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.startDate}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.endDate}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.days}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.location}</td>
                         <td className="py-4">
-                          <select
-                            value={getLeaveStatus(item)}
-                            onChange={(e) =>
-                              setEditedStatuses((prev) => ({
-                                ...prev,
-                                [item.id]: e.target.value,
-                              }))
-                            }
-                            className={`cursor-pointer appearance-none rounded-full border px-3 py-1 text-center text-xs font-medium transition outline-none ${
-                              getLeaveStatus(item) === 'Approved'
+                          <span
+                            className={`rounded-full border px-3 py-1 text-xs font-medium ${
+                              item.status === 'Online'
                                 ? 'border-green-400/20 bg-green-400/10 text-green-400'
-                                : getLeaveStatus(item) === 'Pending'
-                                  ? 'border-amber-400/20 bg-amber-400/10 text-amber-400'
-                                  : 'border-red-400/20 bg-red-400/10 text-red-400'
+                                : 'border-red-400/20 bg-red-400/10 text-red-400'
                             }`}
                           >
-                            <option value="Approved" className="bg-gray-900 text-green-400">
-                              Approved
-                            </option>
-                            <option value="Pending" className="bg-gray-900 text-amber-400">
-                              Pending
-                            </option>
-                            <option value="Rejected" className="bg-gray-900 text-red-400">
-                              Rejected
-                            </option>
-                          </select>
+                            {item.status}
+                          </span>
                         </td>
+                        <td className="py-4 text-sm text-gray-300">{item.lastSync}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.assignedEmployees}</td>
                       </>
                     )}
-                    {activeTab === 'leaveBalances' && (
+                    {activeTab === 'shifts' && (
                       <>
-                        <td className="py-4 text-sm text-white">{item.name}</td>
+                        <td className="py-4 text-sm text-white">{item.shiftName}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.startTime}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.endTime}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.duration}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.days}</td>
                         <td className="py-4 text-sm text-gray-300">{item.department}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.vacation}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.sick}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.personal}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.medical}</td>
-                        <td className="py-4 text-sm font-medium text-white">{item.total}</td>
-                      </>
-                    )}
-                    {activeTab === 'payroll' && (
-                      <>
-                        <td className="py-4 text-sm text-white">{item.name}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.department}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.position}</td>
-                        <td className="py-4 text-sm text-gray-300">{item.hoursWorked}</td>
-
-                        {/* Editable Hourly Rate */}
-                        <td className="py-4 text-sm text-gray-300">
-                          <div className="flex items-center gap-1">
-                            <span className="text-gray-400">R</span>
-                            <input
-                              type="number"
-                              min="0"
-                              step="0.01"
-                              value={getHourlyRate(item)}
-                              onChange={(e) =>
-                                setEditedRates((prev) => ({
-                                  ...prev,
-                                  [item.id]: parseFloat(e.target.value) || 0,
-                                }))
-                              }
-                              className="w-20 [appearance:textfield] rounded-md border border-white/10 bg-white/10 px-2 py-1 text-sm text-white transition outline-none focus:border-orange-500/50 focus:bg-white/15 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-                            />
-                          </div>
-                        </td>
-
-                        {/* Recalculated Gross & Net Pay */}
-                        <td className="py-4 text-sm text-gray-300">R {getCalculatedPay(item).gross}</td>
-                        <td className="py-4 text-sm font-medium text-white">R {getCalculatedPay(item).net}</td>
+                        <td className="py-4 text-sm font-medium text-white">{item.capacity}</td>
                       </>
                     )}
                   </tr>
@@ -1221,67 +1018,6 @@ export default function ReportsPage() {
               >
                 <ChevronRight className="h-4 w-4 text-white" />
               </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Shift Coverage Chart */}
-        <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-          <div className="mb-6 flex items-center gap-3">
-            <div className="rounded-lg border border-orange-500/20 bg-gradient-to-br from-orange-500/20 to-red-500/20 p-2">
-              <Calendar className="h-5 w-5 text-orange-400" />
-            </div>
-            <h2 className="text-white">Shift Coverage</h2>
-          </div>
-
-          <div className="space-y-6">
-            {shiftCoverageData.map((shift, index) => (
-              <div key={index}>
-                <div className="mb-3 flex items-center justify-between">
-                  <div className="text-sm font-medium text-white">{shift.shift}</div>
-                  <div className="text-sm text-gray-400">
-                    {shift.actual} / {shift.scheduled} employees
-                    {shift.gap > 0 && <span className="ml-2 text-red-400">(-{shift.gap} short)</span>}
-                    {shift.gap < 0 && <span className="ml-2 text-yellow-400">(+{Math.abs(shift.gap)} over)</span>}
-                  </div>
-                </div>
-                <div className="relative h-8 overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl">
-                  <div
-                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-green-500/40 to-green-500/60 transition-all duration-500"
-                    style={{ width: `${(shift.actual / shift.scheduled) * 100}%` }}
-                  ></div>
-                  {shift.gap > 0 && (
-                    <div
-                      className="absolute top-0 right-0 h-full bg-red-500/40"
-                      style={{ width: `${(shift.gap / shift.scheduled) * 100}%` }}
-                    ></div>
-                  )}
-                  {shift.gap < 0 && (
-                    <div
-                      className="absolute top-0 h-full bg-yellow-500/40"
-                      style={{
-                        left: `${(shift.scheduled / shift.scheduled) * 100}%`,
-                        width: `${(Math.abs(shift.gap) / shift.scheduled) * 100}%`,
-                      }}
-                    ></div>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-6 flex items-center gap-6 border-t border-white/10 pt-4">
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-green-500/60"></div>
-              <span className="text-xs text-gray-400">Actual Coverage</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-red-500/60"></div>
-              <span className="text-xs text-gray-400">Shortage</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-yellow-500/60"></div>
-              <span className="text-xs text-gray-400">Excess</span>
             </div>
           </div>
         </div>
