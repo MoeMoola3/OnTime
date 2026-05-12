@@ -17,7 +17,7 @@ function figmaAssetResolver() {
 
 export default defineConfig({
   plugins: [figmaAssetResolver(), react(), tailwindcss()],
-  base: 'https://github.com/MoeMoola3/OnTime.git',
+  base: '/OnTime/',
   resolve: {
     alias: {
       // Alias @ to the src directory

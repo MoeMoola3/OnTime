@@ -1,10 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import DashboardPage from './pages/DashboardPage';
 import ReportsPage from './pages/ReportsPage';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="dark min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         <style>{`
           .custom-scrollbar::-webkit-scrollbar { width: 6px; }
@@ -17,6 +17,6 @@ export default function App() {
           <Route path="/reports" element={<ReportsPage />} />
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }

@@ -80,23 +80,444 @@ const mockEmployees = [
   },
 ];
 
-const absenteeismData = [
-  { name: 'Sarah Williams', department: 'Slaughter', missedShifts: 3, lastShift: '2026-05-07', severity: 'high' },
-  { name: 'David Chen', department: 'Dispatch', missedShifts: 2, lastShift: '2026-05-06', severity: 'medium' },
-  { name: 'Lisa Anderson', department: 'Cold Storage', missedShifts: 1, lastShift: '2026-05-05', severity: 'low' },
-];
-
-const absenteeismTrend = [
-  { day: 'Mon', count: 5 },
-  { day: 'Tue', count: 3 },
-  { day: 'Wed', count: 7 },
-  { day: 'Thu', count: 4 },
-  { day: 'Fri', count: 6 },
-];
-
 const shiftCoverageData = [
   { shift: 'Morning Shift', scheduled: 45, actual: 42, gap: 3 },
   { shift: 'Night Shift', scheduled: 25, actual: 27, gap: -2 },
+];
+
+const attendanceData = [
+  {
+    id: 1,
+    name: 'John Smith',
+    department: 'Boning',
+    date: '2026-05-07',
+    clockIn: '08:00',
+    clockOut: '16:30',
+    hours: 8.5,
+    status: 'Present',
+  },
+  {
+    id: 2,
+    name: 'Maria Garcia',
+    department: 'Cold Storage',
+    date: '2026-05-07',
+    clockIn: '07:55',
+    clockOut: '16:25',
+    hours: 8.5,
+    status: 'Present',
+  },
+  {
+    id: 3,
+    name: 'David Chen',
+    department: 'Dispatch',
+    date: '2026-05-07',
+    clockIn: '08:15',
+    clockOut: '16:45',
+    hours: 8.5,
+    status: 'Late',
+  },
+  { id: 4, name: 'Sarah Williams', department: 'Slaughter', date: '2026-05-07', clockIn: '-', clockOut: '-', hours: 0, status: 'Absent' },
+  {
+    id: 5,
+    name: 'Michael Brown',
+    department: 'Boning',
+    date: '2026-05-07',
+    clockIn: '08:05',
+    clockOut: '16:35',
+    hours: 8.5,
+    status: 'Present',
+  },
+  {
+    id: 6,
+    name: 'Lisa Anderson',
+    department: 'Cold Storage',
+    date: '2026-05-07',
+    clockIn: '08:20',
+    clockOut: '16:50',
+    hours: 8.5,
+    status: 'Late',
+  },
+  {
+    id: 7,
+    name: 'James Taylor',
+    department: 'Dispatch',
+    date: '2026-05-07',
+    clockIn: '08:00',
+    clockOut: '16:30',
+    hours: 8.5,
+    status: 'Present',
+  },
+  {
+    id: 8,
+    name: 'Emma Martinez',
+    department: 'Slaughter',
+    date: '2026-05-07',
+    clockIn: '07:58',
+    clockOut: '16:28',
+    hours: 8.5,
+    status: 'Present',
+  },
+  {
+    id: 9,
+    name: 'Robert Johnson',
+    department: 'Boning',
+    date: '2026-05-07',
+    clockIn: '08:02',
+    clockOut: '16:32',
+    hours: 8.5,
+    status: 'Present',
+  },
+  {
+    id: 10,
+    name: 'Jennifer Lee',
+    department: 'Cold Storage',
+    date: '2026-05-07',
+    clockIn: '08:10',
+    clockOut: '16:40',
+    hours: 8.5,
+    status: 'Late',
+  },
+  {
+    id: 11,
+    name: 'Carlos Rodriguez',
+    department: 'Dispatch',
+    date: '2026-05-07',
+    clockIn: '08:00',
+    clockOut: '16:30',
+    hours: 8.5,
+    status: 'Present',
+  },
+  {
+    id: 12,
+    name: 'Patricia Kim',
+    department: 'Slaughter',
+    date: '2026-05-07',
+    clockIn: '07:58',
+    clockOut: '16:28',
+    hours: 8.5,
+    status: 'Present',
+  },
+];
+
+const shiftAssignmentData = [
+  {
+    id: 1,
+    name: 'John Smith',
+    department: 'Boning',
+    shift: 'Morning (6AM-2PM)',
+    date: '2026-05-08',
+    role: 'Shift Lead',
+    status: 'Confirmed',
+  },
+  {
+    id: 2,
+    name: 'Maria Garcia',
+    department: 'Cold Storage',
+    shift: 'Afternoon (2PM-10PM)',
+    date: '2026-05-08',
+    role: 'Operator',
+    status: 'Confirmed',
+  },
+  {
+    id: 3,
+    name: 'David Chen',
+    department: 'Dispatch',
+    shift: 'Morning (6AM-2PM)',
+    date: '2026-05-08',
+    role: 'Coordinator',
+    status: 'Confirmed',
+  },
+  {
+    id: 4,
+    name: 'Sarah Williams',
+    department: 'Slaughter',
+    shift: 'Night (10PM-6AM)',
+    date: '2026-05-08',
+    role: 'Technician',
+    status: 'Pending',
+  },
+  {
+    id: 5,
+    name: 'Michael Brown',
+    department: 'Boning',
+    shift: 'Afternoon (2PM-10PM)',
+    date: '2026-05-08',
+    role: 'Operator',
+    status: 'Confirmed',
+  },
+  {
+    id: 6,
+    name: 'Lisa Anderson',
+    department: 'Cold Storage',
+    shift: 'Morning (6AM-2PM)',
+    date: '2026-05-08',
+    role: 'Shift Lead',
+    status: 'Confirmed',
+  },
+  {
+    id: 7,
+    name: 'James Taylor',
+    department: 'Dispatch',
+    shift: 'Afternoon (2PM-10PM)',
+    date: '2026-05-08',
+    role: 'Coordinator',
+    status: 'Confirmed',
+  },
+  {
+    id: 8,
+    name: 'Emma Martinez',
+    department: 'Slaughter',
+    shift: 'Morning (6AM-2PM)',
+    date: '2026-05-08',
+    role: 'Operator',
+    status: 'Confirmed',
+  },
+  {
+    id: 9,
+    name: 'Robert Johnson',
+    department: 'Boning',
+    shift: 'Night (10PM-6AM)',
+    date: '2026-05-08',
+    role: 'Operator',
+    status: 'Pending',
+  },
+  {
+    id: 10,
+    name: 'Jennifer Lee',
+    department: 'Cold Storage',
+    shift: 'Afternoon (2PM-10PM)',
+    date: '2026-05-08',
+    role: 'Operator',
+    status: 'Confirmed',
+  },
+  {
+    id: 10,
+    name: 'Jennifer Lee',
+    department: 'Cold Storage',
+    shift: 'Afternoon (2PM-10PM)',
+    date: '2026-05-08',
+    role: 'Operator',
+    status: 'Confirmed',
+  },
+];
+
+const leaveRequestsData = [
+  {
+    id: 1,
+    name: 'John Smith',
+    department: 'Boning',
+    leaveType: 'Vacation',
+    startDate: '2026-05-15',
+    endDate: '2026-05-18',
+    days: 4,
+    status: 'Approved',
+  },
+  {
+    id: 2,
+    name: 'Maria Garcia',
+    department: 'Cold Storage',
+    leaveType: 'Sick Leave',
+    startDate: '2026-05-10',
+    endDate: '2026-05-11',
+    days: 2,
+    status: 'Approved',
+  },
+  {
+    id: 3,
+    name: 'David Chen',
+    department: 'Dispatch',
+    leaveType: 'Personal',
+    startDate: '2026-05-20',
+    endDate: '2026-05-20',
+    days: 1,
+    status: 'Pending',
+  },
+  {
+    id: 4,
+    name: 'Sarah Williams',
+    department: 'Slaughter',
+    leaveType: 'Vacation',
+    startDate: '2026-05-22',
+    endDate: '2026-05-25',
+    days: 4,
+    status: 'Pending',
+  },
+  {
+    id: 5,
+    name: 'Michael Brown',
+    department: 'Boning',
+    leaveType: 'Medical',
+    startDate: '2026-05-12',
+    endDate: '2026-05-14',
+    days: 3,
+    status: 'Approved',
+  },
+  {
+    id: 6,
+    name: 'Lisa Anderson',
+    department: 'Cold Storage',
+    leaveType: 'Vacation',
+    startDate: '2026-05-28',
+    endDate: '2026-05-31',
+    days: 4,
+    status: 'Rejected',
+  },
+  {
+    id: 7,
+    name: 'James Taylor',
+    department: 'Dispatch',
+    leaveType: 'Personal',
+    startDate: '2026-05-16',
+    endDate: '2026-05-16',
+    days: 1,
+    status: 'Approved',
+  },
+  {
+    id: 8,
+    name: 'Emma Martinez',
+    department: 'Slaughter',
+    leaveType: 'Sick Leave',
+    startDate: '2026-05-09',
+    endDate: '2026-05-09',
+    days: 1,
+    status: 'Approved',
+  },
+  {
+    id: 9,
+    name: 'Robert Johnson',
+    department: 'Boning',
+    leaveType: 'Vacation',
+    startDate: '2026-06-01',
+    endDate: '2026-06-05',
+    days: 5,
+    status: 'Pending',
+  },
+  {
+    id: 10,
+    name: 'Jennifer Lee',
+    department: 'Cold Storage',
+    leaveType: 'Medical',
+    startDate: '2026-05-13',
+    endDate: '2026-05-15',
+    days: 3,
+    status: 'Approved',
+  },
+];
+
+const leaveBalancesData = [
+  { id: 1, name: 'John Smith', department: 'Boning', vacation: 12, sick: 8, personal: 3, medical: 5, total: 28 },
+  { id: 2, name: 'Maria Garcia', department: 'Cold Storage', vacation: 15, sick: 6, personal: 5, medical: 7, total: 33 },
+  { id: 3, name: 'David Chen', department: 'Dispatch', vacation: 10, sick: 10, personal: 2, medical: 4, total: 26 },
+  { id: 4, name: 'Sarah Williams', department: 'Slaughter', vacation: 18, sick: 7, personal: 4, medical: 6, total: 35 },
+  { id: 5, name: 'Michael Brown', department: 'Boning', vacation: 8, sick: 9, personal: 3, medical: 5, total: 25 },
+  { id: 6, name: 'Lisa Anderson', department: 'Cold Storage', vacation: 14, sick: 8, personal: 5, medical: 6, total: 33 },
+  { id: 7, name: 'James Taylor', department: 'Dispatch', vacation: 11, sick: 7, personal: 4, medical: 5, total: 27 },
+  { id: 8, name: 'Emma Martinez', department: 'Slaughter', vacation: 16, sick: 6, personal: 3, medical: 7, total: 32 },
+  { id: 9, name: 'Robert Johnson', department: 'Boning', vacation: 9, sick: 10, personal: 2, medical: 4, total: 25 },
+  { id: 10, name: 'Jennifer Lee', department: 'Cold Storage', vacation: 13, sick: 8, personal: 5, medical: 6, total: 32 },
+];
+
+const payrollData = [
+  {
+    id: 1,
+    name: 'John Smith',
+    department: 'Boning',
+    position: 'Shift Lead',
+    hoursWorked: 170,
+    hourlyRate: 28.5,
+    grossPay: 4845,
+    netPay: 3876,
+  },
+  {
+    id: 2,
+    name: 'Maria Garcia',
+    department: 'Cold Storage',
+    position: 'Operator',
+    hoursWorked: 168,
+    hourlyRate: 24.0,
+    grossPay: 4032,
+    netPay: 3225.6,
+  },
+  {
+    id: 3,
+    name: 'David Chen',
+    department: 'Dispatch',
+    position: 'Coordinator',
+    hoursWorked: 172,
+    hourlyRate: 26.75,
+    grossPay: 4601,
+    netPay: 3680.8,
+  },
+  {
+    id: 4,
+    name: 'Sarah Williams',
+    department: 'Slaughter',
+    position: 'Technician',
+    hoursWorked: 160,
+    hourlyRate: 27.5,
+    grossPay: 4400,
+    netPay: 3520,
+  },
+  {
+    id: 5,
+    name: 'Michael Brown',
+    department: 'Boning',
+    position: 'Operator',
+    hoursWorked: 170,
+    hourlyRate: 24.0,
+    grossPay: 4080,
+    netPay: 3264,
+  },
+  {
+    id: 6,
+    name: 'Lisa Anderson',
+    department: 'Cold Storage',
+    position: 'Shift Lead',
+    hoursWorked: 168,
+    hourlyRate: 29.0,
+    grossPay: 4872,
+    netPay: 3897.6,
+  },
+  {
+    id: 7,
+    name: 'James Taylor',
+    department: 'Dispatch',
+    position: 'Coordinator',
+    hoursWorked: 172,
+    hourlyRate: 26.75,
+    grossPay: 4601,
+    netPay: 3680.8,
+  },
+  {
+    id: 8,
+    name: 'Emma Martinez',
+    department: 'Slaughter',
+    position: 'Operator',
+    hoursWorked: 170,
+    hourlyRate: 25.5,
+    grossPay: 4335,
+    netPay: 3468,
+  },
+  {
+    id: 9,
+    name: 'Robert Johnson',
+    department: 'Boning',
+    position: 'Operator',
+    hoursWorked: 165,
+    hourlyRate: 24.0,
+    grossPay: 3960,
+    netPay: 3168,
+  },
+  {
+    id: 10,
+    name: 'Jennifer Lee',
+    department: 'Cold Storage',
+    position: 'Operator',
+    hoursWorked: 168,
+    hourlyRate: 24.5,
+    grossPay: 4116,
+    netPay: 3292.8,
+  },
 ];
 
 export default function ReportsPage() {
@@ -107,7 +528,7 @@ export default function ReportsPage() {
   const [selectedDateRange, setSelectedDateRange] = useState('Last 7 Days');
 
   const navigate = useNavigate();
-  const itemsPerPage = 5;
+  const itemsPerPage = 10;
 
   // Filter employees based on selected filters
   const filteredEmployees = mockEmployees.filter((employee) => {
@@ -119,7 +540,7 @@ export default function ReportsPage() {
     return departmentMatch && employeeMatch;
   });
 
-  const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
+  // const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentEmployees = filteredEmployees.slice(startIndex, startIndex + itemsPerPage);
 
@@ -356,23 +777,43 @@ export default function ReportsPage() {
     }
   };
 
-  const getSeverityColor = (severity: string) => {
-    switch (severity) {
-      case 'high':
-        return 'border-l-red-500 bg-red-500/5';
-      case 'medium':
-        return 'border-l-amber-500 bg-amber-500/5';
-      case 'low':
-        return 'border-l-orange-500 bg-orange-500/5';
-      default:
-        return 'border-l-gray-500 bg-gray-500/5';
-    }
-  };
-
   const exportButtonRef = useRef<HTMLButtonElement>(null);
   const departments = ['All Departments', 'Processing', 'Cold Storage', 'Dispatch', 'Slaughter'];
   const employees = ['All Employees', 'Active Only', 'On Leave'];
   const dateRange = ['Last 7 Days', 'Last 30 Days', 'This Month'];
+
+  const [activeTab, setActiveTab] = useState<'attendance' | 'shifts' | 'leaveRequests' | 'leaveBalances' | 'payroll'>('attendance');
+
+  const getCurrentData = () => {
+    switch (activeTab) {
+      case 'attendance':
+        return attendanceData;
+      case 'shifts':
+        return shiftAssignmentData;
+      case 'leaveRequests':
+        return leaveRequestsData;
+      case 'leaveBalances':
+        return leaveBalancesData;
+      case 'payroll':
+        return payrollData;
+      default:
+        return attendanceData;
+    }
+  };
+
+  const handleTabChange = (tab: typeof activeTab) => {
+    setActiveTab(tab);
+    setCurrentPage(1);
+  };
+
+  // Filter data based on selected filters
+  const filteredData = getCurrentData().filter((item) => {
+    const departmentMatch = selectedDepartment === 'All Departments' || item.department === selectedDepartment;
+    return departmentMatch;
+  });
+
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+  const currentData = filteredData.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <div className="mx-auto max-w-[1800px] p-6">
@@ -396,59 +837,67 @@ export default function ReportsPage() {
                 <p className="text-sm text-gray-400">Track workforce activity across departments</p>
               </div>
             </div>
+          </div>
+        </div>
 
-            <div className="flex items-center gap-3">
-              <button className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-white backdrop-blur-xl transition-all duration-300 hover:bg-white/10">
-                <Calendar className="h-4 w-4" />
-                <span className="text-sm">May 1 - May 7, 2026</span>
-              </button>
-
-              <div className="relative">
-                <button
-                  ref={exportButtonRef}
-                  onClick={() => setShowExportMenu(!showExportMenu)}
-                  className="flex items-center gap-2 rounded-xl border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 px-4 py-2.5 text-white transition-all duration-300 hover:from-orange-500/30 hover:to-red-500/30"
-                >
-                  <Download className="h-4 w-4" />
-                  <span className="text-sm">Export</span>
-                </button>
-
-                {showExportMenu &&
-                  createPortal(
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      style={{
-                        position: 'absolute',
-                        top: exportButtonRef.current?.getBoundingClientRect().bottom ?? 0,
-                        right: window.innerWidth - (exportButtonRef.current?.getBoundingClientRect().right ?? 0),
-                      }}
-                      className="absolute right-0 mt-2 w-48 rounded-xl border border-white/10 bg-gray-900/95 p-2 shadow-lg backdrop-blur-xl"
-                    >
-                      <button
-                        onClick={exportToExcel}
-                        className="flex w-full items-center gap-2 rounded-lg px-4 py-2.5 text-left text-sm text-white transition-all hover:bg-white/10"
-                      >
-                        <Download className="h-4 w-4" />
-                        Export as Excel
-                      </button>
-                      <button
-                        onClick={exportToPDF}
-                        className="flex w-full items-center gap-2 rounded-lg px-4 py-2.5 text-left text-sm text-white transition-all hover:bg-white/10"
-                      >
-                        <Download className="h-4 w-4" />
-                        Export as PDF
-                      </button>
-                    </motion.div>,
-                    document.body
-                  )}
-              </div>
-            </div>
+        {/* Sub Navigation */}
+        <div className="relative rounded-2xl border border-white/10 bg-white/5 p-2 backdrop-blur-xl">
+          <div className="flex items-center gap-2 overflow-x-auto">
+            <button
+              onClick={() => handleTabChange('attendance')}
+              className={`rounded-xl px-6 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
+                activeTab === 'attendance'
+                  ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
+                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              Attendance
+            </button>
+            <button
+              onClick={() => handleTabChange('shifts')}
+              className={`rounded-xl px-6 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
+                activeTab === 'shifts'
+                  ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
+                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              Shift Assignment
+            </button>
+            <button
+              onClick={() => handleTabChange('leaveRequests')}
+              className={`rounded-xl px-6 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
+                activeTab === 'leaveRequests'
+                  ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
+                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              Leave Requests
+            </button>
+            <button
+              onClick={() => handleTabChange('leaveBalances')}
+              className={`rounded-xl px-6 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
+                activeTab === 'leaveBalances'
+                  ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
+                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              Leave Balances
+            </button>
+            <button
+              onClick={() => handleTabChange('payroll')}
+              className={`rounded-xl px-6 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
+                activeTab === 'payroll'
+                  ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
+                  : 'text-gray-400 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              Payroll
+            </button>
           </div>
         </div>
 
         {/* Filter Bar */}
-        <div className="relative rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
+        <div className="relative flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
           <div className="flex flex-wrap items-center gap-3">
             <div className="rounded-lg border border-orange-500/20 bg-gradient-to-br from-orange-500/20 to-red-500/20 p-2">
               <Filter className="h-4 w-4 text-orange-400" />
@@ -483,129 +932,243 @@ export default function ReportsPage() {
               Clear
             </button>
           </div>
-        </div>
+          <div className="flex items-center gap-3">
+            <button className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-white backdrop-blur-xl transition-all duration-300 hover:bg-white/10">
+              <Calendar className="h-4 w-4" />
+              <span className="text-sm">May 1 - May 7, 2026</span>
+            </button>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {/* Attendance Report Table */}
-          <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl lg:col-span-2">
-            <div className="mb-6 flex items-center gap-3">
-              <div className="rounded-lg border border-orange-500/20 bg-gradient-to-br from-orange-500/20 to-red-500/20 p-2">
-                <FileText className="h-5 w-5 text-orange-400" />
-              </div>
-              <h2 className="text-white">Attendance Report</h2>
-            </div>
+            <div className="relative">
+              <button
+                ref={exportButtonRef}
+                onClick={() => setShowExportMenu(!showExportMenu)}
+                className="flex items-center gap-2 rounded-xl border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 px-4 py-2.5 text-white transition-all duration-300 hover:from-orange-500/30 hover:to-red-500/30"
+              >
+                <Download className="h-4 w-4" />
+                <span className="text-sm">Export</span>
+              </button>
 
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-white/10">
-                    <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee Name</th>
-                    <th className="pb-3 text-left text-sm font-medium text-gray-400">Department</th>
-                    <th className="pb-3 text-left text-sm font-medium text-gray-400">Date</th>
-                    <th className="pb-3 text-left text-sm font-medium text-gray-400">Clock In</th>
-                    <th className="pb-3 text-left text-sm font-medium text-gray-400">Clock Out</th>
-                    <th className="pb-3 text-left text-sm font-medium text-gray-400">Hours</th>
-                    <th className="pb-3 text-left text-sm font-medium text-gray-400">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentEmployees.map((employee) => (
-                    <tr key={employee.id} className="border-b border-white/5 transition-all duration-300 hover:bg-white/5">
-                      <td className="py-4 text-sm text-white">{employee.name}</td>
-                      <td className="py-4 text-sm text-gray-300">{employee.department}</td>
-                      <td className="py-4 text-sm text-gray-300">{employee.date}</td>
-                      <td className="py-4 text-sm text-gray-300">{employee.clockIn}</td>
-                      <td className="py-4 text-sm text-gray-300">{employee.clockOut}</td>
-                      <td className="py-4 text-sm text-gray-300">{employee.hours}h</td>
-                      <td className="py-4">
-                        <span className={`rounded-full border px-3 py-1 text-xs font-medium ${getStatusColor(employee.status)}`}>
-                          {employee.status}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Pagination */}
-            <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
-              <div className="text-sm text-gray-400">
-                Showing {filteredEmployees.length === 0 ? 0 : startIndex + 1} to{' '}
-                {Math.min(startIndex + itemsPerPage, filteredEmployees.length)} of {filteredEmployees.length} entries
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-                  disabled={currentPage === 1}
-                  className="rounded-lg border border-white/10 bg-white/5 p-2 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  <ChevronLeft className="h-4 w-4 text-white" />
-                </button>
-                {[...Array(totalPages)].map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrentPage(i + 1)}
-                    className={`rounded-lg px-3 py-1.5 text-sm transition-all duration-300 ${
-                      currentPage === i + 1
-                        ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
-                        : 'border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10'
-                    }`}
+              {showExportMenu &&
+                createPortal(
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    style={{
+                      position: 'absolute',
+                      top: exportButtonRef.current?.getBoundingClientRect().bottom ?? 0,
+                      right: window.innerWidth - (exportButtonRef.current?.getBoundingClientRect().right ?? 0),
+                    }}
+                    className="absolute right-0 mt-2 w-48 rounded-xl border border-white/10 bg-gray-900/95 p-2 shadow-lg backdrop-blur-xl"
                   >
-                    {i + 1}
-                  </button>
-                ))}
-                <button
-                  onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
-                  disabled={currentPage === totalPages}
-                  className="rounded-lg border border-white/10 bg-white/5 p-2 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
-                >
-                  <ChevronRight className="h-4 w-4 text-white" />
-                </button>
-              </div>
+                    <button
+                      onClick={exportToExcel}
+                      className="flex w-full items-center gap-2 rounded-lg px-4 py-2.5 text-left text-sm text-white transition-all hover:bg-white/10"
+                    >
+                      <Download className="h-4 w-4" />
+                      Export as Excel
+                    </button>
+                    <button
+                      onClick={exportToPDF}
+                      className="flex w-full items-center gap-2 rounded-lg px-4 py-2.5 text-left text-sm text-white transition-all hover:bg-white/10"
+                    >
+                      <Download className="h-4 w-4" />
+                      Export as PDF
+                    </button>
+                  </motion.div>,
+                  document.body
+                )}
             </div>
           </div>
+        </div>
 
-          {/* Absenteeism Tracking Panel */}
-          <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-            <div className="mb-6 flex items-center gap-3">
-              <div className="rounded-lg border border-red-500/20 bg-gradient-to-br from-red-500/20 to-amber-500/20 p-2">
-                <AlertTriangle className="h-5 w-5 text-red-400" />
-              </div>
-              <h2 className="text-white">Absenteeism Tracking</h2>
+        {/* Data Table */}
+        <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+          <div className="mb-6 flex items-center gap-3">
+            <div className="rounded-lg border border-orange-500/20 bg-gradient-to-br from-orange-500/20 to-red-500/20 p-2">
+              <FileText className="h-5 w-5 text-orange-400" />
             </div>
+            <h2 className="text-white">
+              {activeTab === 'attendance' && 'Attendance Report'}
+              {activeTab === 'shifts' && 'Shift Assignment'}
+              {activeTab === 'leaveRequests' && 'Leave Requests'}
+              {activeTab === 'leaveBalances' && 'Leave Balances'}
+              {activeTab === 'payroll' && 'Payroll Report'}
+            </h2>
+          </div>
 
-            <div className="mb-6 space-y-3">
-              {absenteeismData.map((employee, index) => (
-                <div key={index} className={`rounded-xl border-l-4 bg-white/5 p-4 backdrop-blur-xl ${getSeverityColor(employee.severity)}`}>
-                  <div className="mb-1 text-sm font-medium text-white">{employee.name}</div>
-                  <div className="mb-2 text-xs text-gray-400">{employee.department}</div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500">Missed: {employee.missedShifts}</span>
-                    <span className="text-xs text-gray-500">Last: {employee.lastShift}</span>
-                  </div>
-                </div>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-white/10">
+                  {activeTab === 'attendance' && (
+                    <>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee Name</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Department</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Date</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Clock In</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Clock Out</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Hours</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Status</th>
+                    </>
+                  )}
+                  {activeTab === 'shifts' && (
+                    <>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee Name</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Department</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Shift</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Date</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Role</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Status</th>
+                    </>
+                  )}
+                  {activeTab === 'leaveRequests' && (
+                    <>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee Name</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Department</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Leave Type</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Start Date</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">End Date</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Days</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Status</th>
+                    </>
+                  )}
+                  {activeTab === 'leaveBalances' && (
+                    <>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee Name</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Department</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Vacation</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Sick</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Personal</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Medical</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Total</th>
+                    </>
+                  )}
+                  {activeTab === 'payroll' && (
+                    <>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Employee Name</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Department</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Position</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Hours Worked</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Hourly Rate</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Gross Pay</th>
+                      <th className="pb-3 text-left text-sm font-medium text-gray-400">Net Pay</th>
+                    </>
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {currentData.map((item: any) => (
+                  <tr key={item.id} className="border-b border-white/5 transition-all duration-300 hover:bg-white/5">
+                    {activeTab === 'attendance' && (
+                      <>
+                        <td className="py-4 text-sm text-white">{item.name}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.department}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.date}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.clockIn}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.clockOut}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.hours}h</td>
+                        <td className="py-4">
+                          <span className={`rounded-full border px-3 py-1 text-xs font-medium ${getStatusColor(item.status)}`}>
+                            {item.status}
+                          </span>
+                        </td>
+                      </>
+                    )}
+                    {activeTab === 'shifts' && (
+                      <>
+                        <td className="py-4 text-sm text-white">{item.name}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.department}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.shift}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.date}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.role}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.status}</td>
+                      </>
+                    )}
+                    {activeTab === 'leaveRequests' && (
+                      <>
+                        <td className="py-4 text-sm text-white">{item.name}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.department}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.leaveType}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.startDate}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.endDate}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.days}</td>
+                        <td className="py-4">
+                          <span
+                            className={`rounded-full border px-3 py-1 text-xs font-medium ${
+                              item.status === 'Approved'
+                                ? 'border-green-400/20 bg-green-400/10 text-green-400'
+                                : item.status === 'Pending'
+                                  ? 'border-amber-400/20 bg-amber-400/10 text-amber-400'
+                                  : 'border-red-400/20 bg-red-400/10 text-red-400'
+                            }`}
+                          >
+                            {item.status}
+                          </span>
+                        </td>
+                      </>
+                    )}
+                    {activeTab === 'leaveBalances' && (
+                      <>
+                        <td className="py-4 text-sm text-white">{item.name}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.department}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.vacation}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.sick}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.personal}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.medical}</td>
+                        <td className="py-4 text-sm font-medium text-white">{item.total}</td>
+                      </>
+                    )}
+                    {activeTab === 'payroll' && (
+                      <>
+                        <td className="py-4 text-sm text-white">{item.name}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.department}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.position}</td>
+                        <td className="py-4 text-sm text-gray-300">{item.hoursWorked}</td>
+                        <td className="py-4 text-sm text-gray-300">R {item.hourlyRate}</td>
+                        <td className="py-4 text-sm text-gray-300">R {item.grossPay}</td>
+                        <td className="py-4 text-sm font-medium text-white">R {item.netPay}</td>
+                      </>
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination */}
+          <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-4">
+            <div className="text-sm text-gray-400">
+              Showing {filteredData.length === 0 ? 0 : startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredData.length)} of{' '}
+              {filteredData.length} entries
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+                className="rounded-lg border border-white/10 bg-white/5 p-2 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <ChevronLeft className="h-4 w-4 text-white" />
+              </button>
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`rounded-lg px-3 py-1.5 text-sm transition-all duration-300 ${
+                    currentPage === i + 1
+                      ? 'border border-orange-500/30 bg-gradient-to-br from-orange-500/20 to-red-500/20 text-white'
+                      : 'border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10'
+                  }`}
+                >
+                  {i + 1}
+                </button>
               ))}
-            </div>
-
-            <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-              <h3 className="mb-4 text-sm font-medium text-white">Weekly Trend</h3>
-              <ResponsiveContainer width="100%" height={150}>
-                <BarChart data={absenteeismTrend}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
-                  <XAxis dataKey="day" stroke="rgba(255,255,255,0.4)" fontSize={12} />
-                  <YAxis stroke="rgba(255,255,255,0.4)" fontSize={12} />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: 'rgba(0,0,0,0.8)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      borderRadius: '8px',
-                      color: '#fff',
-                    }}
-                  />
-                  <Bar dataKey="count" fill="rgba(251, 146, 60, 0.8)" radius={[8, 8, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
+              <button
+                onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+                disabled={currentPage === totalPages}
+                className="rounded-lg border border-white/10 bg-white/5 p-2 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <ChevronRight className="h-4 w-4 text-white" />
+              </button>
             </div>
           </div>
         </div>
