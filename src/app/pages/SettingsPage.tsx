@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { ChevronLeft, Bell, Clock, Users, Shield, Database, Palette, Globe } from 'lucide-react';
+import { ChevronLeft, Bell, Clock, Users, Shield, Database, Palette, Globe, Settings } from 'lucide-react';
 import NavBar from '../components/NavBar';
+import { useNavigate } from 'react-router-dom';
 
 export default function SettingsPage() {
   const [notifications, setNotifications] = useState({
@@ -24,6 +25,8 @@ export default function SettingsPage() {
     dateFormat: 'MM/DD/YYYY',
   });
 
+  const navigate = useNavigate();
+
   return (
     <div className="mx-auto max-w-[1800px] p-6">
       <div className="space-y-6">
@@ -32,17 +35,17 @@ export default function SettingsPage() {
         <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
           <div className="flex items-center gap-4">
             <button
-              onClick={() => console.log('Back Navigate')}
+              onClick={() => navigate(-1)}
               className="rounded-xl border border-white/10 bg-white/5 p-2 backdrop-blur-xl transition-all duration-300 hover:bg-white/10"
             >
               <ChevronLeft className="h-5 w-5 text-white" />
             </button>
             <div className="rounded-xl border border-orange-500/20 bg-gradient-to-br from-orange-500/20 to-red-500/20 p-3">
-              <Shield className="h-6 w-6 text-orange-400" />
+              <Settings className="h-6 w-6 text-orange-400" />
             </div>
             <div>
               <h1 className="mb-1 text-white">Settings</h1>
-              <p className="text-sm text-gray-400">Configure system preferences and options</p>
+              <p className="text-sm text-gray-400">Configure System Preferences and Options</p>
             </div>
           </div>
         </div>

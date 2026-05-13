@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, FileText, Users, Settings } from 'lucide-react';
+import { LayoutDashboard, FileText, Blocks, Settings } from 'lucide-react';
 import IconLogo from './ui/IconLogo';
 
 const navItems = [
   { icon: LayoutDashboard, label: 'Dashboard', to: '/' },
   { icon: FileText, label: 'Reports', to: '/reports' },
-  { icon: Users, label: 'Operations', to: '/operations' },
+  { icon: Blocks, label: 'Operations', to: '/operations' },
   { icon: Settings, label: 'Settings', to: '/settings' },
 ];
 
@@ -18,8 +18,8 @@ export default function NavBar() {
       <div className="flex shrink-0 items-center gap-3">
         <IconLogo />
         <div>
-          <h1 className="leading-tight font-semibold tracking-tight text-white">Time & Attendance</h1>
-          <p className="text-xs font-medium tracking-wide text-orange-400 uppercase">Real-time workforce monitoring</p>
+          <h1 className="leading-tight font-semibold tracking-tight text-white">Excellent Meat</h1>
+          <p className="text-xs font-medium tracking-wide text-orange-400 uppercase">Commited to Excellence</p>
         </div>
       </div>
       <div className="flex-1">

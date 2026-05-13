@@ -1,524 +1,20 @@
 import NavBar from '../components/NavBar';
-import { useRef, useState } from 'react';
-import { FileText, Calendar, Download, Filter, X, ChevronLeft, ChevronRight, AlertTriangle } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useEffect, useRef, useState } from 'react';
+import { FileText, Calendar, Download, Filter, X, ChevronLeft, ChevronRight, Grid3x3 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { CustomDropdown } from '../components/ui/CustomDropdown';
-const mockEmployees = [
-  {
-    id: 1,
-    name: 'John Smith',
-    department: 'Processing',
-    date: '2026-05-07',
-    clockIn: '08:00',
-    clockOut: '16:30',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 2,
-    name: 'Maria Garcia',
-    department: 'Cold Storage',
-    date: '2026-05-07',
-    clockIn: '07:55',
-    clockOut: '16:25',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 3,
-    name: 'David Chen',
-    department: 'Dispatch',
-    date: '2026-05-07',
-    clockIn: '08:15',
-    clockOut: '16:45',
-    hours: 8.5,
-    status: 'Late',
-  },
-  { id: 4, name: 'Sarah Williams', department: 'Slaughter', date: '2026-05-07', clockIn: '-', clockOut: '-', hours: 0, status: 'Absent' },
-  {
-    id: 5,
-    name: 'Michael Brown',
-    department: 'Processing',
-    date: '2026-05-07',
-    clockIn: '08:05',
-    clockOut: '16:35',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 6,
-    name: 'Lisa Anderson',
-    department: 'Cold Storage',
-    date: '2026-05-07',
-    clockIn: '08:20',
-    clockOut: '16:50',
-    hours: 8.5,
-    status: 'Late',
-  },
-  {
-    id: 7,
-    name: 'James Taylor',
-    department: 'Dispatch',
-    date: '2026-05-07',
-    clockIn: '08:00',
-    clockOut: '16:30',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 8,
-    name: 'Emma Martinez',
-    department: 'Slaughter',
-    date: '2026-05-07',
-    clockIn: '07:58',
-    clockOut: '16:28',
-    hours: 8.5,
-    status: 'Present',
-  },
-];
-
-const shiftCoverageData = [
-  { shift: 'Morning Shift', scheduled: 45, actual: 42, gap: 3 },
-  { shift: 'Night Shift', scheduled: 25, actual: 27, gap: -2 },
-];
-
-const attendanceData = [
-  {
-    id: 1,
-    name: 'John Smith',
-    department: 'Processing',
-    date: '2026-05-07',
-    clockIn: '08:00',
-    clockOut: '16:30',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 2,
-    name: 'Maria Garcia',
-    department: 'Cold Storage',
-    date: '2026-05-07',
-    clockIn: '07:55',
-    clockOut: '16:25',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 3,
-    name: 'David Chen',
-    department: 'Dispatch',
-    date: '2026-05-07',
-    clockIn: '08:15',
-    clockOut: '16:45',
-    hours: 8.5,
-    status: 'Late',
-  },
-  { id: 4, name: 'Sarah Williams', department: 'Slaughter', date: '2026-05-07', clockIn: '-', clockOut: '-', hours: 0, status: 'Absent' },
-  {
-    id: 5,
-    name: 'Michael Brown',
-    department: 'Processing',
-    date: '2026-05-07',
-    clockIn: '08:05',
-    clockOut: '16:35',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 6,
-    name: 'Lisa Anderson',
-    department: 'Cold Storage',
-    date: '2026-05-07',
-    clockIn: '08:20',
-    clockOut: '16:50',
-    hours: 8.5,
-    status: 'Late',
-  },
-  {
-    id: 7,
-    name: 'James Taylor',
-    department: 'Dispatch',
-    date: '2026-05-07',
-    clockIn: '08:00',
-    clockOut: '16:30',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 8,
-    name: 'Emma Martinez',
-    department: 'Slaughter',
-    date: '2026-05-07',
-    clockIn: '07:58',
-    clockOut: '16:28',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 9,
-    name: 'Robert Johnson',
-    department: 'Processing',
-    date: '2026-05-07',
-    clockIn: '08:02',
-    clockOut: '16:32',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 10,
-    name: 'Jennifer Lee',
-    department: 'Cold Storage',
-    date: '2026-05-07',
-    clockIn: '08:10',
-    clockOut: '16:40',
-    hours: 8.5,
-    status: 'Late',
-  },
-  {
-    id: 11,
-    name: 'Carlos Rodriguez',
-    department: 'Dispatch',
-    date: '2026-05-07',
-    clockIn: '08:00',
-    clockOut: '16:30',
-    hours: 8.5,
-    status: 'Present',
-  },
-  {
-    id: 12,
-    name: 'Patricia Kim',
-    department: 'Slaughter',
-    date: '2026-05-07',
-    clockIn: '07:58',
-    clockOut: '16:28',
-    hours: 8.5,
-    status: 'Present',
-  },
-];
-
-const shiftAssignmentData = [
-  {
-    id: 1,
-    name: 'John Smith',
-    department: 'Processing',
-    shift: 'Morning (6AM-2PM)',
-    date: '2026-05-08',
-    role: 'Shift Lead',
-    status: 'Confirmed',
-  },
-  {
-    id: 2,
-    name: 'Maria Garcia',
-    department: 'Cold Storage',
-    shift: 'Afternoon (2PM-10PM)',
-    date: '2026-05-08',
-    role: 'Operator',
-    status: 'Confirmed',
-  },
-  {
-    id: 3,
-    name: 'David Chen',
-    department: 'Dispatch',
-    shift: 'Morning (6AM-2PM)',
-    date: '2026-05-08',
-    role: 'Coordinator',
-    status: 'Confirmed',
-  },
-  {
-    id: 4,
-    name: 'Sarah Williams',
-    department: 'Slaughter',
-    shift: 'Night (10PM-6AM)',
-    date: '2026-05-08',
-    role: 'Technician',
-    status: 'Pending',
-  },
-  {
-    id: 5,
-    name: 'Michael Brown',
-    department: 'Processing',
-    shift: 'Afternoon (2PM-10PM)',
-    date: '2026-05-08',
-    role: 'Operator',
-    status: 'Confirmed',
-  },
-  {
-    id: 6,
-    name: 'Lisa Anderson',
-    department: 'Cold Storage',
-    shift: 'Morning (6AM-2PM)',
-    date: '2026-05-08',
-    role: 'Shift Lead',
-    status: 'Confirmed',
-  },
-  {
-    id: 7,
-    name: 'James Taylor',
-    department: 'Dispatch',
-    shift: 'Afternoon (2PM-10PM)',
-    date: '2026-05-08',
-    role: 'Coordinator',
-    status: 'Confirmed',
-  },
-  {
-    id: 8,
-    name: 'Emma Martinez',
-    department: 'Slaughter',
-    shift: 'Morning (6AM-2PM)',
-    date: '2026-05-08',
-    role: 'Operator',
-    status: 'Confirmed',
-  },
-  {
-    id: 9,
-    name: 'Robert Johnson',
-    department: 'Processing',
-    shift: 'Night (10PM-6AM)',
-    date: '2026-05-08',
-    role: 'Operator',
-    status: 'Pending',
-  },
-  {
-    id: 10,
-    name: 'Jennifer Lee',
-    department: 'Cold Storage',
-    shift: 'Afternoon (2PM-10PM)',
-    date: '2026-05-08',
-    role: 'Operator',
-    status: 'Confirmed',
-  },
-  {
-    id: 10,
-    name: 'Jennifer Lee',
-    department: 'Cold Storage',
-    shift: 'Afternoon (2PM-10PM)',
-    date: '2026-05-08',
-    role: 'Operator',
-    status: 'Confirmed',
-  },
-];
-
-const leaveRequestsData = [
-  {
-    id: 1,
-    name: 'John Smith',
-    department: 'Processing',
-    leaveType: 'Vacation',
-    startDate: '2026-05-15',
-    endDate: '2026-05-18',
-    days: 4,
-    status: 'Approved',
-  },
-  {
-    id: 2,
-    name: 'Maria Garcia',
-    department: 'Cold Storage',
-    leaveType: 'Sick Leave',
-    startDate: '2026-05-10',
-    endDate: '2026-05-11',
-    days: 2,
-    status: 'Approved',
-  },
-  {
-    id: 3,
-    name: 'David Chen',
-    department: 'Dispatch',
-    leaveType: 'Personal',
-    startDate: '2026-05-20',
-    endDate: '2026-05-20',
-    days: 1,
-    status: 'Pending',
-  },
-  {
-    id: 4,
-    name: 'Sarah Williams',
-    department: 'Slaughter',
-    leaveType: 'Vacation',
-    startDate: '2026-05-22',
-    endDate: '2026-05-25',
-    days: 4,
-    status: 'Pending',
-  },
-  {
-    id: 5,
-    name: 'Michael Brown',
-    department: 'Processing',
-    leaveType: 'Medical',
-    startDate: '2026-05-12',
-    endDate: '2026-05-14',
-    days: 3,
-    status: 'Approved',
-  },
-  {
-    id: 6,
-    name: 'Lisa Anderson',
-    department: 'Cold Storage',
-    leaveType: 'Vacation',
-    startDate: '2026-05-28',
-    endDate: '2026-05-31',
-    days: 4,
-    status: 'Rejected',
-  },
-  {
-    id: 7,
-    name: 'James Taylor',
-    department: 'Dispatch',
-    leaveType: 'Personal',
-    startDate: '2026-05-16',
-    endDate: '2026-05-16',
-    days: 1,
-    status: 'Approved',
-  },
-  {
-    id: 8,
-    name: 'Emma Martinez',
-    department: 'Slaughter',
-    leaveType: 'Sick Leave',
-    startDate: '2026-05-09',
-    endDate: '2026-05-09',
-    days: 1,
-    status: 'Approved',
-  },
-  {
-    id: 9,
-    name: 'Robert Johnson',
-    department: 'Processing',
-    leaveType: 'Vacation',
-    startDate: '2026-06-01',
-    endDate: '2026-06-05',
-    days: 5,
-    status: 'Pending',
-  },
-  {
-    id: 10,
-    name: 'Jennifer Lee',
-    department: 'Cold Storage',
-    leaveType: 'Medical',
-    startDate: '2026-05-13',
-    endDate: '2026-05-15',
-    days: 3,
-    status: 'Approved',
-  },
-];
-
-const leaveBalancesData = [
-  { id: 1, name: 'John Smith', department: 'Processing', vacation: 12, sick: 8, personal: 3, medical: 5, total: 28 },
-  { id: 2, name: 'Maria Garcia', department: 'Cold Storage', vacation: 15, sick: 6, personal: 5, medical: 7, total: 33 },
-  { id: 3, name: 'David Chen', department: 'Dispatch', vacation: 10, sick: 10, personal: 2, medical: 4, total: 26 },
-  { id: 4, name: 'Sarah Williams', department: 'Slaughter', vacation: 18, sick: 7, personal: 4, medical: 6, total: 35 },
-  { id: 5, name: 'Michael Brown', department: 'Processing', vacation: 8, sick: 9, personal: 3, medical: 5, total: 25 },
-  { id: 6, name: 'Lisa Anderson', department: 'Cold Storage', vacation: 14, sick: 8, personal: 5, medical: 6, total: 33 },
-  { id: 7, name: 'James Taylor', department: 'Dispatch', vacation: 11, sick: 7, personal: 4, medical: 5, total: 27 },
-  { id: 8, name: 'Emma Martinez', department: 'Slaughter', vacation: 16, sick: 6, personal: 3, medical: 7, total: 32 },
-  { id: 9, name: 'Robert Johnson', department: 'Processing', vacation: 9, sick: 10, personal: 2, medical: 4, total: 25 },
-  { id: 10, name: 'Jennifer Lee', department: 'Cold Storage', vacation: 13, sick: 8, personal: 5, medical: 6, total: 32 },
-];
-
-const payrollData = [
-  {
-    id: 1,
-    name: 'John Smith',
-    department: 'Processing',
-    position: 'Shift Lead',
-    hoursWorked: 170,
-    hourlyRate: 28.5,
-    grossPay: 4845,
-    netPay: 3876,
-  },
-  {
-    id: 2,
-    name: 'Maria Garcia',
-    department: 'Cold Storage',
-    position: 'Operator',
-    hoursWorked: 168,
-    hourlyRate: 24.0,
-    grossPay: 4032,
-    netPay: 3225.6,
-  },
-  {
-    id: 3,
-    name: 'David Chen',
-    department: 'Dispatch',
-    position: 'Coordinator',
-    hoursWorked: 172,
-    hourlyRate: 26.75,
-    grossPay: 4601,
-    netPay: 3680.8,
-  },
-  {
-    id: 4,
-    name: 'Sarah Williams',
-    department: 'Slaughter',
-    position: 'Technician',
-    hoursWorked: 160,
-    hourlyRate: 27.5,
-    grossPay: 4400,
-    netPay: 3520,
-  },
-  {
-    id: 5,
-    name: 'Michael Brown',
-    department: 'Processing',
-    position: 'Operator',
-    hoursWorked: 170,
-    hourlyRate: 24.0,
-    grossPay: 4080,
-    netPay: 3264,
-  },
-  {
-    id: 6,
-    name: 'Lisa Anderson',
-    department: 'Cold Storage',
-    position: 'Shift Lead',
-    hoursWorked: 168,
-    hourlyRate: 29.0,
-    grossPay: 4872,
-    netPay: 3897.6,
-  },
-  {
-    id: 7,
-    name: 'James Taylor',
-    department: 'Dispatch',
-    position: 'Coordinator',
-    hoursWorked: 172,
-    hourlyRate: 26.75,
-    grossPay: 4601,
-    netPay: 3680.8,
-  },
-  {
-    id: 8,
-    name: 'Emma Martinez',
-    department: 'Slaughter',
-    position: 'Operator',
-    hoursWorked: 170,
-    hourlyRate: 25.5,
-    grossPay: 4335,
-    netPay: 3468,
-  },
-  {
-    id: 9,
-    name: 'Robert Johnson',
-    department: 'Processing',
-    position: 'Operator',
-    hoursWorked: 165,
-    hourlyRate: 24.0,
-    grossPay: 3960,
-    netPay: 3168,
-  },
-  {
-    id: 10,
-    name: 'Jennifer Lee',
-    department: 'Cold Storage',
-    position: 'Operator',
-    hoursWorked: 168,
-    hourlyRate: 24.5,
-    grossPay: 4116,
-    netPay: 3292.8,
-  },
-];
+import { exportExcel } from '../utils/exportExcel';
+import { exportPdf } from '../utils/exportPdf';
+import {
+  getAttendanceData,
+  getLeaveBalancesData,
+  getLeaveRequestsData,
+  getPayrollData,
+  getShiftAssignmentData,
+  getShiftCoverageData,
+} from '../api/mock';
 
 export default function ReportsPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -529,20 +25,7 @@ export default function ReportsPage() {
 
   const navigate = useNavigate();
   const itemsPerPage = 10;
-
-  // Filter employees based on selected filters
-  const filteredEmployees = mockEmployees.filter((employee) => {
-    const departmentMatch = selectedDepartment === 'All Departments' || employee.department === selectedDepartment;
-    const employeeMatch =
-      selectedEmployees === 'All Employees' ||
-      (selectedEmployees === 'Active Only' && employee.status !== 'Absent') ||
-      (selectedEmployees === 'On Leave' && employee.status === 'Absent');
-    return departmentMatch && employeeMatch;
-  });
-
-  // const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentEmployees = filteredEmployees.slice(startIndex, startIndex + itemsPerPage);
 
   const handleClearFilters = () => {
     setSelectedDepartment('All Departments');
@@ -567,219 +50,6 @@ export default function ReportsPage() {
 
   const getLeaveStatus = (item: any) => editedStatuses[item.id] ?? item.status;
 
-  const exportToExcel = () => {
-    const htmlContent = `
-      <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
-        <head>
-          <meta charset="utf-8">
-          <!--[if gte mso 9]>
-          <xml>
-            <x:ExcelWorkbook>
-              <x:ExcelWorksheets>
-                <x:ExcelWorksheet>
-                  <x:Name>Attendance Report</x:Name>
-                  <x:WorksheetOptions>
-                    <x:DisplayGridlines/>
-                  </x:WorksheetOptions>
-                </x:ExcelWorksheet>
-              </x:ExcelWorksheets>
-            </x:ExcelWorkbook>
-          </xml>
-          <![endif]-->
-          <style>
-            table {
-              border-collapse: collapse;
-              width: 100%;
-            }
-            th {
-              background-color: #f97316;
-              color: white;
-              font-weight: bold;
-              padding: 12px;
-              text-align: left;
-              border: 1px solid #ddd;
-            }
-            td {
-              padding: 10px;
-              border: 1px solid #ddd;
-              text-align: left;
-            }
-            .status-present {
-              background-color: #d1fae5;
-              color: #065f46;
-              font-weight: 500;
-            }
-            .status-late {
-              background-color: #fef3c7;
-              color: #92400e;
-              font-weight: 500;
-            }
-            .status-absent {
-              background-color: #fee2e2;
-              color: #991b1b;
-              font-weight: 500;
-            }
-          </style>
-        </head>
-        <body>
-          <table>
-            <thead>
-              <tr>
-                <th>Employee Name</th>
-                <th>Department</th>
-                <th>Date</th>
-                <th>Clock In</th>
-                <th>Clock Out</th>
-                <th>Hours Worked</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${filteredEmployees
-                .map(
-                  (emp) => `
-                <tr>
-                  <td>${emp.name}</td>
-                  <td>${emp.department}</td>
-                  <td>${emp.date}</td>
-                  <td>${emp.clockIn}</td>
-                  <td>${emp.clockOut}</td>
-                  <td>${emp.hours}</td>
-                  <td class="status-${emp.status.toLowerCase()}">${emp.status}</td>
-                </tr>
-              `
-                )
-                .join('')}
-            </tbody>
-          </table>
-        </body>
-      </html>
-    `;
-
-    const blob = new Blob([htmlContent], { type: 'application/vnd.ms-excel' });
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    link.setAttribute('href', url);
-    link.setAttribute('download', `attendance_report_${new Date().toISOString().split('T')[0]}.xls`);
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    setShowExportMenu(false);
-  };
-
-  const exportToPDF = () => {
-    const printWindow = window.open('', '', 'height=800,width=1000');
-    if (!printWindow) return;
-
-    const htmlContent = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>Attendance Report - ${new Date().toLocaleDateString()}</title>
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              padding: 20px;
-              color: #333;
-            }
-            h1 {
-              color: #1a1a1a;
-              margin-bottom: 10px;
-            }
-            .subtitle {
-              color: #666;
-              margin-bottom: 30px;
-            }
-            table {
-              width: 100%;
-              border-collapse: collapse;
-              margin-top: 20px;
-            }
-            th {
-              background-color: #f3f4f6;
-              padding: 12px;
-              text-align: left;
-              border-bottom: 2px solid #ddd;
-              font-weight: 600;
-            }
-            td {
-              padding: 10px 12px;
-              border-bottom: 1px solid #eee;
-            }
-            tr:hover {
-              background-color: #f9fafb;
-            }
-            .status {
-              padding: 4px 12px;
-              border-radius: 12px;
-              font-size: 12px;
-              font-weight: 500;
-            }
-            .status-present {
-              background-color: #d1fae5;
-              color: #065f46;
-            }
-            .status-late {
-              background-color: #fef3c7;
-              color: #92400e;
-            }
-            .status-absent {
-              background-color: #fee2e2;
-              color: #991b1b;
-            }
-            @media print {
-              body { margin: 0; }
-            }
-          </style>
-        </head>
-        <body>
-          <h1>Attendance Report</h1>
-          <p class="subtitle">Generated on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}</p>
-          <table>
-            <thead>
-              <tr>
-                <th>Employee Name</th>
-                <th>Department</th>
-                <th>Date</th>
-                <th>Clock In</th>
-                <th>Clock Out</th>
-                <th>Hours Worked</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${filteredEmployees
-                .map(
-                  (emp) => `
-                <tr>
-                  <td>${emp.name}</td>
-                  <td>${emp.department}</td>
-                  <td>${emp.date}</td>
-                  <td>${emp.clockIn}</td>
-                  <td>${emp.clockOut}</td>
-                  <td>${emp.hours}h</td>
-                  <td><span class="status status-${emp.status.toLowerCase()}">${emp.status}</span></td>
-                </tr>
-              `
-                )
-                .join('')}
-            </tbody>
-          </table>
-        </body>
-      </html>
-    `;
-
-    printWindow.document.write(htmlContent);
-    printWindow.document.close();
-    printWindow.focus();
-    setTimeout(() => {
-      printWindow.print();
-      printWindow.close();
-    }, 250);
-    setShowExportMenu(false);
-  };
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'Present':
@@ -794,6 +64,7 @@ export default function ReportsPage() {
   };
 
   const exportButtonRef = useRef<HTMLButtonElement>(null);
+  const exportMenuRef = useRef<HTMLDivElement>(null);
   const departments = ['All Departments', 'Processing', 'Cold Storage', 'Dispatch', 'Slaughter'];
   const employees = ['All Employees', 'Active Only', 'On Leave'];
   const dateRange = ['Last 7 Days', 'Last 30 Days', 'This Month'];
@@ -803,17 +74,17 @@ export default function ReportsPage() {
   const getCurrentData = () => {
     switch (activeTab) {
       case 'attendance':
-        return attendanceData;
+        return getAttendanceData();
       case 'shifts':
-        return shiftAssignmentData;
+        return getShiftAssignmentData();
       case 'leaveRequests':
-        return leaveRequestsData;
+        return getLeaveRequestsData();
       case 'leaveBalances':
-        return leaveBalancesData;
+        return getLeaveBalancesData();
       case 'payroll':
-        return payrollData;
+        return getPayrollData();
       default:
-        return attendanceData;
+        return getAttendanceData();
     }
   };
 
@@ -830,6 +101,27 @@ export default function ReportsPage() {
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   const currentData = filteredData.slice(startIndex, startIndex + itemsPerPage);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        exportButtonRef.current &&
+        !exportButtonRef.current.contains(event.target as Node) &&
+        exportMenuRef.current &&
+        !exportMenuRef.current.contains(event.target as Node)
+      ) {
+        setShowExportMenu(false);
+      }
+    };
+
+    if (showExportMenu) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showExportMenu]);
 
   return (
     <div className="mx-auto max-w-[1800px] p-6">
@@ -967,24 +259,25 @@ export default function ReportsPage() {
               {showExportMenu &&
                 createPortal(
                   <motion.div
+                    ref={exportMenuRef}
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     style={{
                       position: 'absolute',
-                      top: exportButtonRef.current?.getBoundingClientRect().bottom ?? 0,
-                      right: window.innerWidth - (exportButtonRef.current?.getBoundingClientRect().right ?? 0),
+                      top: (exportButtonRef.current?.getBoundingClientRect().bottom ?? 0) + window.scrollY,
+                      right: window.innerWidth - (exportButtonRef.current?.getBoundingClientRect().right ?? 0) + window.scrollX,
                     }}
                     className="absolute right-0 mt-2 w-48 rounded-xl border border-white/10 bg-gray-900/95 p-2 shadow-lg backdrop-blur-xl"
                   >
                     <button
-                      onClick={exportToExcel}
+                      onClick={() => exportExcel(getAttendanceData())}
                       className="flex w-full items-center gap-2 rounded-lg px-4 py-2.5 text-left text-sm text-white transition-all hover:bg-white/10"
                     >
                       <Download className="h-4 w-4" />
                       Export as Excel
                     </button>
                     <button
-                      onClick={exportToPDF}
+                      onClick={() => exportPdf(getAttendanceData())}
                       className="flex w-full items-center gap-2 rounded-lg px-4 py-2.5 text-left text-sm text-white transition-all hover:bg-white/10"
                     >
                       <Download className="h-4 w-4" />
@@ -1001,7 +294,7 @@ export default function ReportsPage() {
         <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
           <div className="mb-6 flex items-center gap-3">
             <div className="rounded-lg border border-orange-500/20 bg-gradient-to-br from-orange-500/20 to-red-500/20 p-2">
-              <FileText className="h-5 w-5 text-orange-400" />
+              <Grid3x3 className="h-5 w-5 text-orange-400" />
             </div>
             <h2 className="text-white">
               {activeTab === 'attendance' && 'Attendance Report'}
@@ -1235,7 +528,7 @@ export default function ReportsPage() {
           </div>
 
           <div className="space-y-6">
-            {shiftCoverageData.map((shift, index) => (
+            {getShiftCoverageData().map((shift, index) => (
               <div key={index}>
                 <div className="mb-3 flex items-center justify-between">
                   <div className="text-sm font-medium text-white">{shift.shift}</div>
