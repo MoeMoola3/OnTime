@@ -899,6 +899,25 @@ const shiftsData = [
   },
 ];
 
+const metricsData = [
+  { id: 1, name: 'John Smith', department: 'Processing', minutesAgo: 2, avatar: 'JS', status: 'On Time', clockIn: '08:00' },
+  { id: 2, name: 'Maria Garcia', department: 'Cold Storage', minutesAgo: 5, avatar: 'MG', status: 'On Time', clockIn: '07:55' },
+  { id: 3, name: 'David Chen', department: 'Dispatch', minutesAgo: 8, avatar: 'DC', status: 'Late', clockIn: '08:18' },
+  { id: 4, name: 'Sarah Williams', department: 'Slaughter', minutesAgo: 12, avatar: 'SW', status: 'On Leave', clockIn: '-' },
+  { id: 5, name: 'Michael Brown', department: 'Processing', minutesAgo: 15, avatar: 'MB', status: 'On Time', clockIn: '08:05' },
+  { id: 6, name: 'Lisa Anderson', department: 'Cold Storage', minutesAgo: 18, avatar: 'LA', status: 'Late', clockIn: '08:22' },
+  { id: 7, name: 'James Taylor', department: 'Dispatch', minutesAgo: 22, avatar: 'JT', status: 'On Time', clockIn: '08:00' },
+  { id: 8, name: 'Emma Martinez', department: 'Slaughter', minutesAgo: 25, avatar: 'EM', status: 'On Time', clockIn: '07:58' },
+  { id: 9, name: 'Robert Johnson', department: 'Processing', minutesAgo: 28, avatar: 'RJ', status: 'Late', clockIn: '08:30' },
+  { id: 10, name: 'Jennifer Lee', department: 'Cold Storage', minutesAgo: 32, avatar: 'JL', status: 'Late', clockIn: '08:25' },
+  { id: 11, name: 'Carlos Rodriguez', department: 'Dispatch', minutesAgo: 35, avatar: 'CR', status: 'Late', clockIn: '08:35' },
+  { id: 12, name: 'Patricia Kim', department: 'Slaughter', minutesAgo: 38, avatar: 'PK', status: 'On Time', clockIn: '07:58' },
+  { id: 13, name: 'Thomas Wright', department: 'Processing', minutesAgo: 40, avatar: 'TW', status: 'Late', clockIn: '08:28' },
+  { id: 14, name: 'Nancy Lopez', department: 'Cold Storage', minutesAgo: 42, avatar: 'NL', status: 'Early Departure', clockIn: '08:00' },
+  { id: 15, name: 'Kevin Moore', department: 'Dispatch', minutesAgo: 45, avatar: 'KM', status: 'On Leave', clockIn: '-' },
+  { id: 16, name: 'Sandra Davis', department: 'Slaughter', minutesAgo: 48, avatar: 'SD', status: 'Late', clockIn: '08:20' },
+];
+
 export function getCompanyMetrics() {
   return companyMetrics;
 }
@@ -952,4 +971,8 @@ export function getTerminalsData() {
 
 export function getShiftsData() {
   return shiftsData;
+}
+
+export function getMetricsData() {
+  return metricsData;
 }
