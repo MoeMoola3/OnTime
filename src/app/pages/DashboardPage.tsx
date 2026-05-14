@@ -14,8 +14,7 @@ export default function DashboardPage() {
     employees: [],
   });
   return (
-    <div className="dark min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-6">
-      <div className="absolute inset-0 bg-black/20" />
+    <div className="mx-auto max-w-[1800px] p-6">
       <div className="mx-auto max-w-[1800px]">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_380px]">
           <div className="space-y-6">

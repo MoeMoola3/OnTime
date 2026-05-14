@@ -8,6 +8,7 @@ export default function App() {
   return (
     <HashRouter>
       <div className="dark min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <div className="absolute inset-0 bg-black/5" />
         <style>{`
           .custom-scrollbar::-webkit-scrollbar { width: 6px; }
           .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
